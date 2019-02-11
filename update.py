@@ -4,7 +4,7 @@ import pymongo
 import requests
 
 from config import API_KEY
-from createDB import countries, country_codes
+from countries import countries, country_codes
 
 #connect to mongodb
 conn = 'mongodb://localhost:27017/top_headlines'
@@ -54,6 +54,6 @@ if latestDate < today:
                            "date": article["publishedAt"][:10]}
             #add article dict to countries data db
             collection.update_one({"country": countries[i]}, {"$push": {"articles": articleDict}})
-            articlesList.append(articleDict)
+    print("Database updated.")
 else:
     print("Database is up to date.")
