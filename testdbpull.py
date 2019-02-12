@@ -5,6 +5,9 @@ import requests
 import json
 from py_translator import Translator
 import csv
+import sys
+
+import logging
 
 langByCountry = {}
 with open('countrieslang.csv') as csvfile:
@@ -15,9 +18,12 @@ with open('countrieslang.csv') as csvfile:
         #print(row[0])
         #print(row[0],row[1],row[2],)
 #print(langByCountry)
-
-s = Translator().translate(text='help my silly friend', dest='es').text
-print(s)
+try:
+  s = Translator().translate(text='help my silly friend', dest='es').text
+  print(s)
+except json.decoder.JSONDecodeError as airOr:
+  #x = sys.exc_info()
+  print(airOr)
 
 from config import API_KEY
 #from countries import countries, country_codes
@@ -49,34 +55,38 @@ def removeSymbols(word):
   return word
 
 for country in data:
-    # print(country['country'])
+    print(country['country'])
+    print("----------------------------------------------------")
     # print(country['country_code'])
     # print(len(country['articles']))
     f = open(country['country']+".txt", "w")
-    thisLang = ''
-    def setLang(lang):
-      global thisLang
-      thisLang = lang
-      
-    (setLang(langByCountry[country['country_code']]) if (langByCountry[country['country_code']] != '' ) else (print("no"))) if (country['country_code'] in langByCountry) else print('country code not found!!!!!!')
-    
     
     countryWords[country['country']] = ''
     for article in country['articles']:
-      if (thisLang != ''):
-        
-        #print(article['title'])
-        try:
-          article['title'] = Translator().translate(text=article['title'], dest='en').text
-          print("translating")
-        except:
-          print("failed to translate")
-          article['title'] = article['title']
-        print(article['title'])
+  
+      #on a country basis
       countryWords[country['country']] = countryWords[country['country']] + article['title'] + ' '
-      allWords = allWords + article['title']
+
+      #a master list of all words NOT translated yet
+      #allWords = allWords + article['title']
+    
+    #translate here!
     thisWords = countryWords[country['country']]
-    f.write(json.dumps(countryWords[country['country']]))
+    print("BEFORE")
+    print(thisWords)
+    thisLang = 'en'
+    if (thisLang != ''):
+      #TRANSLATE TO ENGLISH en
+      try:
+        thisWords = Translator().translate(text=thisWords, dest='en').text
+        #print("translating")
+      except:
+        print("failed to translate")
+      print("AFTER")
+      print(thisWords)
+    allWords = allWords + thisWords
+    #dump to country file.. for testing yo
+    f.write(json.dumps(thisWords))
     thisList = {}
     #words per country
     for x in thisWords.split():
