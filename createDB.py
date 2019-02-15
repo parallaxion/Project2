@@ -3,15 +3,12 @@ import pymongo
 from config import API_KEY
 from countries import countries, country_codes
 
-rawData = {}
 countriesData = []
 for i in range(len(country_codes)):
     #visit news api
     query_url = f"https://newsapi.org/v2/top-headlines?country={country_codes[i]}&apiKey={API_KEY}"
     #get response
     response = requests.get(query_url).json()
-    #add raw articles data to rawData dict
-    rawData[countries[i]] = response["articles"]
     
     #set empty articles list
     articlesList = []
@@ -43,12 +40,9 @@ db = client["top_headlines"]
 
 #drop if exists for initial db creation
 db["countries_data"].drop()
-db["raw_countries_data"].drop()
 
 #declare the collection
-rawCollection = db["raw_countries_data"]
 collection = db["countries_data"]
 
-#insert data into dbs
-rawCollection.insert_one(rawData)
+#insert data into db
 collection.insert_many(countriesData)
