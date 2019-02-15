@@ -48,44 +48,46 @@ if latestDate < today:
         #get response
         response = requests.get(query_url).json()
 
-        #initialize countryWords dict and date
+        #initialize countryWords dict and date list
         countryWords[countries[i]] = ''
-        date = ""
+        date_list = []
         
         #for each article
         for article in response["articles"]:
             #set date and title
             date = article["publishedAt"][:10]
             title = article["title"].split(" - ")[0]
+            #add date to date list
+            date_list.append(date)
 
             #construct article dictionary
             articleDict = {"source": article["source"]["name"], 
                         "title": title, 
                         "url": article["url"], 
                         "date": date}
+            #set the collection
+            collection = db["countries_data"]
             #add article dict to countries data db
             collection.update_one({"country": countries[i]}, {"$push": {"articles": articleDict}})
             
             #add title text to countryWords dict
             countryWords[countries[i]] = countryWords[countries[i]] + title + ' '
-        
+            ####end of articles loop
+            ########################
+
         #untranslated string of article titles
         untranslated = countryWords[countries[i]]
         # print(untranslated)
 
-        #try to translate
-        try:
-            translated = Translator().translate(text=untranslated, dest='en').text
-            # print(translated)
+        #translate
+        translated = Translator().translate(text=untranslated, dest='en').text
+        # print(translated)
 
-            #set the collection
-            collection = db["countries_words"]
-            #add translated string to countries_words collection
-            collection.update_one({"country": countries[i]}, {"$set": {date: translated}}, upsert=True)
+        #set the collection
+        collection = db["countries_words"]
+        #add translated string to countries_words collection
+        collection.update_one({"country": countries[i]}, {"$set": {max(date_list): translated}}, upsert=True)
         
-        except:
-            print(f"{countries[i]}: failed to translate")
-            
         #add translated string to string of all titles
         allWords = allWords + translated
 
@@ -170,10 +172,10 @@ if latestDate < today:
 
         #set special character list
         special_chars = ["-", "'", ":", ".", "’", "‘", "\\", "(", ")", "”", "“", "!", "?", "【", "】", "\""]
-        print(j, word)
+        # print(j, word)
         #if any special characters in word or word less than 2 characters,
         if any(x in word for x in special_chars) or len(word) < 2:
-            print(j)
+            # print(j)
             #remove word-score pair
             phrasesScores.pop(j)
 
@@ -196,7 +198,7 @@ if latestDate < today:
             #if word has no letters,
             else:
                 #remove word-score pair
-                print(word + " has no letters")
+                # print(word + " has no letters")
                 phrasesScores.pop(j)
 
     #set collection
