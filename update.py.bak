@@ -4,7 +4,7 @@ import pymongo
 import requests
 import string
 
-from config import API_KEY
+API_KEY = "d1ec08b1a7784187bf02370654ffdeac"
 from countries import countries, country_codes
 
 from rake_nltk import Rake, Metric
@@ -79,19 +79,15 @@ if latestDate < today:
         untranslated = countryWords[countries[i]]
         # print(untranslated)
 
-        #try to translate
-        try:
-            translated = Translator().translate(text=untranslated, dest='en').text
-            # print(translated)
-            print('translated')
-            #set the collection
-            collection = db["countries_words"]
-            #add translated string to countries_words collection
-            collection.update_one({"country": countries[i]}, {"$set": {max(date_list): translated}}, upsert=True)
+        #translate
+        translated = Translator().translate(text=untranslated, dest='en').text
+        # print(translated)
+
+        #set the collection
+        collection = db["countries_words"]
+        #add translated string to countries_words collection
+        collection.update_one({"country": countries[i]}, {"$set": {max(date_list): translated}}, upsert=True)
         
-        except:
-            print(f"{countries[i]}: failed to translate")
-            
         #add translated string to string of all titles
         allWords = allWords + translated
 
