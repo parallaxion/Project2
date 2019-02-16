@@ -39,6 +39,9 @@ today = dt.datetime.strftime(dt.date.today(), "%Y-%m-%d")
 countryWords = {}
 allWords = ''
 
+#if ran create db today#otherwise comment this out
+latestDate = '2019-01-01'
+
 #if latest date is before today,
 if latestDate < today:
     #for length of country_code list
@@ -68,6 +71,8 @@ if latestDate < today:
             #set the collection
             collection = db["countries_data"]
             #add article dict to countries data db
+
+            #comment out this line if running same day as createDB
             collection.update_one({"country": countries[i]}, {"$push": {"articles": articleDict}})
             
             #add title text to countryWords dict
@@ -84,6 +89,7 @@ if latestDate < today:
             translated = Translator().translate(text=untranslated, dest='en').text
             # print(translated)
             print('translated')
+
             #set the collection
             collection = db["countries_words"]
             #add translated string to countries_words collection
@@ -91,9 +97,25 @@ if latestDate < today:
         
         except:
             print(f"{countries[i]}: failed to translate")
+            print(untranslated)
             
         #add translated string to string of all titles
-        allWords = allWords + translated
+        allWords = allWords + translated + ' '
+
+        #unRaked word list
+        
+        collectionBlob = db["countries_wordblob"]
+        zz = collectionBlob.find_one({"country": countries[i]})
+        print(type(zz))
+        splitWords = translated.split()
+        if zz is not None:
+            print("not none")
+            print(zz)
+            newWordGroup = zz["words"].extend(splitWords)
+        else:
+            newWordGroup = splitWords
+        #update countries_keywords collection with keywords_dict
+        collectionBlob.update_one({"country": countries[i]}, {'$set': {"words": newWordGroup }}, upsert=True)
 
         #set rake settings
         r = Rake(max_length=2, ranking_metric=Metric.WORD_DEGREE)
@@ -113,7 +135,7 @@ if latestDate < today:
             word = pair[1]
 
             #set special character list
-            special_chars = ["-", "'", ":", ".", "’", "‘", "\\", "(", ")", "”", "“", "!", "?", "【", "】", "\""]
+            special_chars = ["-", "'", ":", ".", "’", "‘", "\\", "(", ")", "”", "“", "!", "?", "【", "】", "\"","🔥"]
             # print(j, word)
             #if any special characters in word or word less than 2 characters,
             if any(x in word for x in special_chars) or len(word) < 2:
