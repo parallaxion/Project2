@@ -106,14 +106,36 @@ if latestDate < today:
         
         collectionBlob = db["countries_wordblob"]
         zz = collectionBlob.find_one({"country": countries[i]})
-        print(type(zz))
+        #print(type(zz))
         splitWords = translated.split()
+        if splitWords is None:
+            print("alerttttt EMPLY WORD LIST")
+       # print(splitWords)
         if zz is not None:
-            print("not none")
-            print(zz)
-            newWordGroup = zz["words"].extend(splitWords)
+            print(countries[i] + " country exists")
+            #print(zz)
+            #print(zz['words'])
+            if zz["words"] != None:
+                print("WORDS TO ADD FROM DATABASE:")
+                print(zz["words"])
+                print("NEW WORDS TO ADD:")
+                print(splitWords)
+                newWordGroup = zz["words"] + splitWords
+                print('checking comparison for dups')
+                if (zz['words'][-len(splitWords):] == splitWords):
+                    print('dubs found, aborting add')
+                    continue
+                print("NEW JOINED LIST:")
+                print(newWordGroup)
+            else:
+                print("NO PREVIOUS DATA")
+                newWordGroup = splitWords
+                print(newWordGroup)
+
         else:
+            print(countries[i] + "was null")
             newWordGroup = splitWords
+        print("------------------------------------------------")
         #update countries_keywords collection with keywords_dict
         collectionBlob.update_one({"country": countries[i]}, {'$set': {"words": newWordGroup }}, upsert=True)
 
