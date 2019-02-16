@@ -3,6 +3,7 @@ import pandas as pd
 import pymongo
 import requests
 import json
+#import update from updateDB
 from config import API_KEY
 #from countries import countries, country_codes
 
@@ -12,9 +13,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
- 
+    #update()
     return render_template('index.html')
 
+@app.route("/geojson")
+def geo():
+    #filename = "hello.txt"
+    with open('countries.geo.json') as f:
+        data = json.load(f)
+    return json.dumps(data)
 
 @app.route("/keywords/")
 def keywords():
