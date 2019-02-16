@@ -48,4 +48,17 @@ var map = L.map("map", {
   console.log("hi2")
 };
 
+//https://stackoverflow.com/questions/13316925/simple-label-on-a-leaflet-geojson-polygon
+// L.geoJson(geoJsonData, {
+//   onEachFeature: function(feature, layer) {
+//     var label = L.marker(layer.getBounds().getCenter(), {
+//       icon: L.divIcon({
+//         className: 'label',
+//         html: feature.properties.NAME,
+//         iconSize: [100, 40]
+//       })
+//     }).addTo(map);
+//   }
+// );
+
 run()
