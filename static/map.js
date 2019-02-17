@@ -18,8 +18,6 @@ var results = [{"Country": "Argentina", "Top": ["Trump", "Resigns", "Woman", "Wo
 coords = {"Argentina": [-38.4161, -63.6167], "Canada": [56.1304, -106.3468]}
 
 d3.json("/world").then(function(data){  //http://localhost:5000/world //, { mode: 'cors'}
-  console.log("funk")
-  console.log(data)
 })
 
 console.log(coords)
@@ -43,4 +41,3 @@ d3.json('/geojson').then(function(data) {
   console.log(data)
   L.geoJson(data).addTo(myMap);
 });
-console.log("hi2")

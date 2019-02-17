@@ -38,7 +38,7 @@ today = dt.datetime.strftime(dt.date.today(), "%Y-%m-%d")
 #initialize countryWords dict and allWords string
 countryWords = {}
 allWords = ''
-
+latestDate = "2019-02-13"
 #if latest date is before today,
 if latestDate < today:
     #for length of country_code list
@@ -68,7 +68,7 @@ if latestDate < today:
             #set the collection
             collection = db["countries_data"]
             #add article dict to countries data db
-            collection.update_one({"country": countries[i]}, {"$push": {"articles": articleDict}})
+            # collection.update_one({"country": countries[i]}, {"$push": {"articles": articleDict}})
             
             #add title text to countryWords dict
             countryWords[countries[i]] = countryWords[countries[i]] + title + ' '
@@ -80,16 +80,19 @@ if latestDate < today:
         # print(untranslated)
 
         #translate
-        translated = Translator().translate(text=untranslated, dest='en').text
+        try:
+            translated = Translator().translate(text=untranslated, dest='en').text
+        
         # print(translated)
 
         #set the collection
-        collection = db["countries_words"]
-        #add translated string to countries_words collection
-        collection.update_one({"country": countries[i]}, {"$set": {max(date_list): translated}}, upsert=True)
-        
+            collection = db["countries_words"]
+            #add translated string to countries_words collection
+            collection.update_one({"country": countries[i]}, {"$set": {max(date_list): translated}}, upsert=True)
+        except:
+            print(f"{countries[i]} failed + {untranslated}")
         #add translated string to string of all titles
-        allWords = allWords + translated
+        allWords = allWords + translated + " "
 
         #set rake settings
         r = Rake(max_length=2, ranking_metric=Metric.WORD_DEGREE)

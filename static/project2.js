@@ -1,15 +1,7 @@
-//h chart code for individual countries using Plotly
-//svg starter code below
-
-//issues/questions: 
-//chart page/location
-//defining country variable to country clicked on map or separate country page?
-
-//country variable defined for testing purposes
 var country = "Argentina"
+//
 function buildChart(country) {
   var countryurl = `/charts/${country}`;
-
   var chartData = d3.json(countryurl).then((data) => {
     var name = data.country;
     var x = data.quantity;
