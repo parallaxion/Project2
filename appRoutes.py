@@ -3,6 +3,8 @@ import pandas as pd
 import pymongo
 import requests
 import json
+import requests
+
 from bson.json_util import dumps
 #import update from updateDB
 from config import API_KEY
@@ -10,6 +12,8 @@ from config import API_KEY
 
 from flask import Flask, jsonify, render_template
 app = Flask(__name__)
+
+
 
 conn = 'mongodb://localhost:27017/top_headlines'
 print(conn)
@@ -22,6 +26,7 @@ db = client["top_headlines"]
 def index():
     #update()
     return render_template('index.html')
+
 
 @app.route("/blob")
 def blob():
@@ -69,27 +74,50 @@ def test():   #connect to mongodb
     # # Declare the database
     # db = client["top_headlines"]
     # Declare the collection
-    collection = db["countries_keywords"]
+   
+###    collection = db["countries_keywords"]
 
-    data = collection.find()
+    # data = collection.find()
 
-    #get data
-    #countries =  db.collection.find().distinct("country")
-    routeReturn = {}
-    for country in collection.find().distinct('country'):
-     #   print(country)
-        myWords = collection.find_one({"country": country})
-        routeReturn[country] = myWords['keywords']
-    #    print(myWords['keywords'])
-    print(routeReturn)
-    
+    # #get data
+    # #countries =  db.collection.find().distinct("country")
+    # routeReturn = {}
+    # for country in collection.find().distinct('country'):
+    #  #   print(country)
+    #     myWords = collection.find_one({"country": country})
+    #     routeReturn[country] = myWords['keywords']
+    # #    print(myWords['keywords'])
+    # print(routeReturn)
+    ###
    ## data = collection.find({"country": "Ireland"})
     #print(DeprecationWarning)
    # for x in data:
         #print(x)
-
+    routeReturn = getKeywords()
     return json.dumps(routeReturn)
 
+@app.route("/nodes")
+def nodes():
+    
+    flaskJSON= getKeywords()
+    print(flaskJSON)
+    return render_template('nodes.html', flaskJSON=flaskJSON )
+
+def getKeywords():
+        collection = db["countries_keywords"]
+
+        data = collection.find()
+
+        #get data
+        #countries =  db.collection.find().distinct("country")
+        routeReturn = {}
+        for country in collection.find().distinct('country'):
+        #   print(country)
+            myWords = collection.find_one({"country": country})
+            routeReturn[country] = myWords['keywords']
+        #    print(myWords['keywords'])
+        print(routeReturn)
+        return(routeReturn)
 
 if __name__ == "__main__":
     app.run(debug=True)

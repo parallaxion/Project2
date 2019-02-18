@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
+<style>
+
+.link {
+  stroke: #aaa;
+}
+
+.node text {
+stroke:#333;
+cursos:pointer;
+}
+
+.node circle{
+stroke:#fff;
+stroke-width:3px;
+fill:#555;
+}
+
+</style>
+<body>
+<script>
+
+// d3.json("/world").then(function(data){
+
+//   console.log(data)
+// })
+
+var width = 1200,
+    height = 500
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+
+var force = d3.layout.force()
+    .gravity(.05)
+    .distance(100)
+    .charge(-100)
+    .size([width, height]);
+
+
+
+
+wordIndex = {}
+
+// d3.json("http://localhost:5000/world").then(function(dat){
+//   console.log(dat)
+// })
+
+
+//.then(function(dat){
+//   console.log(dat)
+// })
+json = {}
+d3.json("{{ url_for('static', filename='graph.json') }}", function(json) {
+console.log(json.nodes[0].name)
+
+
+//d3.json("/world", function(words){
+words = JSON.parse('{{ flaskJSON | tojson | safe }}')
+console.log("do I exist?")
+console.log(words)
+
+wordIndex = words
+//console.log(json.nodes)
+// // // list has trash countries cannot index from data
+// i = 0
+// for (v in wordIndex){
+//   //if (json.nodes[i].name != undefined){    break}
+//   console.log("v " + v)
+//   console.log(i)
+//   if(v === "Hong Kong" || v === "Singapor" || v === "Global"){console.log("unused key");continue}
+//   for (k in wordIndex[v]){
+//     try{
+//     console.log("JSON NODE AS KEY:")
+//     console.log(json.nodes[i])
+    
+//     json.nodes[i].name = json.nodes[i].name + ' (' + v + ') ' +k  
+//     console.log("after:")
+    
+//     console.log(json.nodes[i])
+//     console.log(v + ' ' +k)
+//     i++
+//     break;
+//     }catch(err){
+//       console.log(err)
+//       console.log("SKIPPING")
+//       i++
+//       break;
+//     }
+//     //
+//   }
+
+// } //i++end
+//i = 0
+topWord = {}
+for (v in wordIndex){
+  //console.log(v)
+//if (json.nodes[i].name != undefined){    break}
+//   console.log("v " + v)
+//   console.log(i)
+//   if(v === "Hong Kong" || v === "Singapor" || v === "Global"){console.log("unused key");continue}
+  for (k in wordIndex[v]){
+    //console.log(k)
+    topWord[v] = k
+    break
+  }
+}
+console.log(topWord)
+for (item in json.nodes){
+  
+  console.log(json.nodes[item].name)
+  console.log(json.nodes[item])
+  if (topWord[json.nodes[item].name]){
+  json.nodes[item].name = json.nodes[item].name + ' ' + topWord[json.nodes[item].name].toUpperCase()
+  }
+  
+}
+
+console.log(json.nodes)
+//return json
+
+//return json
+//testing this option
+//}).then(function(crap){//})
+//})
+
+
+
+//d3.json(json, function(json) {
+console.log("DOES JSON EXIST?")
+console.log(json)
+
+  
+  force
+      .nodes(json.nodes)
+      .links(json.links)
+      .start();
+
+  var link = svg.selectAll(".link")
+      .data(json.links)
+    .enter().append("line")
+      .attr("class", "link")
+    .style("stroke-width", function(d) { return Math.sqrt(d.weight); });
+
+  var node = svg.selectAll(".node")
+      .data(json.nodes)
+    .enter().append("g")
+      .attr("class", "node")
+      .call(force.drag);
+
+  node.append("circle")
+      .attr("r","5");
+
+  node.append("text")
+      .attr("dx", 12)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.name });
+
+  force.on("tick", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  });
+//});
+})
+</script>
