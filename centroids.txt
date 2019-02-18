@@ -1,0 +1,255 @@
+SpatialPoints:
+                                                    x           y
+Aruba                                     -69.9734469  12.5167779
+Afghanistan                                66.0084469  33.8362667
+Angola                                     17.5364576 -12.2911800
+Anguilla                                  -63.0608217  18.2255962
+Albania                                    20.0539890  41.1425822
+Aland                                      20.0371484  60.2073340
+Andorra                                     1.5607562  42.5413265
+United Arab Emirates                       54.3018241  23.9082133
+Argentina                                 -65.1782179 -35.3826963
+Armenia                                    44.9323012  40.2881341
+American Samoa                           -170.3975898 -14.2549844
+Antarctica                                 19.9752933 -80.5165671
+Ashmore and Cartier Islands               123.5856899 -12.4325256
+French Southern and Antarctic Lands        68.9911815 -49.0627033
+Antigua and Barbuda                       -61.7909966  17.2842937
+Australia                                 134.4925718 -25.7323647
+Austria                                    14.1306729  47.5856569
+Azerbaijan                                 47.5423939  40.2890438
+Burundi                                    29.8750827  -3.3574253
+Belgium                                     4.6401214  50.6374061
+Benin                                       2.3287376   9.6412083
+Burkina Faso                               -1.7555911  12.2695602
+Bangladesh                                 90.2433895  23.8428461
+Bulgaria                                   25.2177389  42.7685399
+Bahrain                                    50.5443560  26.0489453
+The Bahamas                               -76.5506518  24.2218008
+Bosnia and Herzegovina                     17.7734047  44.1717386
+Saint Barthelemy                          -62.8318771  17.9054258
+Belarus                                    28.0335665  53.5318805
+Belize                                    -88.7048345  17.2008155
+Bermuda                                   -64.7558549  32.3104565
+Bolivia                                   -64.6847536 -16.7068768
+Brazil                                    -53.0939720 -10.7827808
+Barbados                                  -59.5604785  13.1808644
+Brunei                                    114.7273545   4.5163376
+Bhutan                                     90.4039477  27.4105926
+Botswana                                   23.7989867 -22.1857723
+Central African Republic                   20.4648087   6.5663214
+Canada                                    -98.3160630  61.3731260
+Switzerland                                 8.2153826  46.7990229
+Chile                                     -71.3551193 -37.6960716
+China                                     103.8249104  36.5612765
+Ivory Coast                                -5.5690106   7.6278390
+Clipperton Island                        -109.2206767  10.2973588
+Cameroon                                   12.7370834   5.6931277
+Cyprus No Mans Area                        33.2585970  35.1019160
+Democratic Republic of the Congo           23.6458487  -2.8795929
+Republic of the Congo                      15.2186857  -0.8387239
+Cook Islands                             -158.7814366 -19.8187046
+Colombia                                  -73.0801868   3.9109559
+Comoros                                    43.6807883 -11.8844007
+Cape Verde                                -23.9666130  15.9359017
+Costa Rica                                -84.1932382   9.9736046
+Coral Sea Islands                         151.2548841 -18.5063203
+Cuba                                      -79.0333032  21.6246920
+Curacao                                   -68.9705275  12.1936224
+Cayman Islands                            -80.8701716  19.4339515
+Northern Cyprus                            33.5946320  35.2738455
+Cyprus                                     32.9902277  34.9149978
+Czech Republic                             15.3141031  49.7324482
+Germany                                    10.3815483  51.1062132
+Djibouti                                   42.5666703  11.7502086
+Dominica                                  -61.3561917  15.4362550
+Denmark                                    10.0506697  55.9647168
+Dominican Republic                        -70.4962723  18.8962045
+Algeria                                     2.6177893  28.1584628
+Ecuador                                   -78.7732295  -1.4247470
+Egypt                                      29.8612842  26.4923757
+Eritrea                                    38.8531783  15.3575384
+Dhekelia Sovereign Base Area               33.7925908  35.0179161
+Spain                                      -3.6568021  40.2369005
+Estonia                                    25.5359568  58.6708374
+Ethiopia                                   39.6005511   8.6229517
+Finland                                    26.2709888  64.4952853
+Fiji                                      163.6981409 -17.4466589
+Falkland Islands                          -59.3717001 -51.7323795
+France                                     -2.7705245  42.1716009
+Faroe Islands                              -6.8699980  62.0737302
+Federated States of Micronesia            155.2477593   7.1153773
+Gabon                                      11.7922393  -0.5870106
+Gaza                                       34.3519059  31.3899508
+United Kingdom                             -2.8864099  54.1467825
+Georgia                                    43.5076510  42.1688164
+Guernsey                                   -2.5310134  49.4843185
+Ghana                                      -1.2164662   7.9537972
+Gibraltar                                  -5.3715204  36.1292567
+Guinea                                    -10.9429169  10.4346691
+Gambia                                    -15.3971034  13.4497803
+Guinea Bissau                             -14.9773653  12.0270005
+Equatorial Guinea                          10.3331705   1.7069452
+Greece                                     22.9751402  39.0512197
+Grenada                                   -61.6559423  12.1531998
+Greenland                                 -41.3437593  74.7360669
+Guatemala                                 -90.3650578  15.6933961
+Guam                                      144.7722160  13.4436340
+Guyana                                    -58.9799048   4.7951416
+Hong Kong S.A.R.                          114.1319871  22.3845363
+Heard Island and McDonald Islands          73.5056371 -53.0888163
+Honduras                                  -86.6184155  14.8241656
+Croatia                                    16.3986616  45.0677604
+Haiti                                     -72.6907026  18.9381403
+Hungary                                    19.3967593  47.1632437
+Indonesia                                 117.2721054  -2.2208311
+Isle of Man                                -4.5342792  54.2280723
+India                                      79.6122137  22.8873660
+Indian Ocean Territories                  104.6214301 -10.6919995
+British Indian Ocean Territory             72.2992752  -7.1444362
+Ireland                                    -8.1444257  53.1778744
+Iran                                       54.2762865  32.5720271
+Iraq                                       43.7449864  33.0397972
+Iceland                                   -18.5958066  64.9980124
+Israel                                     34.9960998  31.4435482
+Italy                                      12.0721370  42.7862489
+Jamaica                                   -77.3185348  18.1545937
+Jersey                                     -2.1268242  49.2208051
+Jordan                                     36.7709462  31.2455984
+Japan                                     137.9925353  37.5559007
+Baykonur Cosmodrome                        63.3840617  45.9783046
+Siachen Glacier                            77.1801457  35.3912624
+Kazakhstan                                 67.2960126  48.1606709
+Kenya                                      37.7962257   0.5980815
+Kyrgyzstan                                 74.5416695  41.4619187
+Cambodia                                  104.9028200  12.7155723
+Kiribati                                  -55.3200661   0.7998103
+Saint Kitts and Nevis                     -62.6977784  17.2708225
+Korea No Mans Area                        127.4916223  38.2657524
+South Korea                               127.8321937  36.3504726
+Kosovo                                     20.8737430  42.5728833
+Kuwait                                     47.5905797  29.3387879
+Laos                                      103.7378734  18.5022984
+Lebanon                                    35.8802723  33.9203976
+Liberia                                    -9.3197807   6.4523177
+Libya                                      18.0095834  27.0302057
+Saint Lucia                               -60.9695774  13.9024849
+Liechtenstein                               9.5409003  47.1382064
+Sri Lanka                                  80.7035495   7.6157383
+Lesotho                                    28.2286229 -29.5797304
+Lithuania                                  23.8883687  55.3270076
+Luxembourg                                  6.0717639  49.7668244
+Latvia                                     24.9091282  56.8517611
+Macau S.A.R                               113.5513278  22.1570398
+Saint Martin                              -63.0542704  18.0773284
+Morocco                                    -8.4555330  29.8342455
+Monaco                                      7.3987635  43.7460328
+Moldova                                    28.4613971  47.1951014
+Madagascar                                 46.7064584 -19.3732539
+Maldives                                   73.3310839   3.6797796
+Mexico                                   -102.5270403  23.9475463
+Marshall Islands                          170.0900882   7.1129814
+Macedonia                                  21.6838304  41.5950048
+Mali                                       -3.5390794  17.3441628
+Malta                                      14.4042447  35.9208012
+Myanmar                                    96.4891864  21.1694145
+Montenegro                                 19.2385009  42.7858561
+Mongolia                                  103.0562867  46.8258061
+Northern Mariana Islands                  145.5926201  16.1148066
+Mozambique                                 35.5375258 -17.2703761
+Mauritania                                -10.3429165  20.2563071
+Montserrat                                -62.1866702  16.7373389
+Mauritius                                  57.8546175 -20.2215119
+Malawi                                     34.2899078 -13.2172259
+Malaysia                                  109.6977023   3.7923969
+Namibia                                    17.2107962 -22.1286690
+New Caledonia                             165.6715851 -21.2931636
+Niger                                       9.3860345  17.4184642
+Norfolk Island                            167.9554024 -29.0351079
+Nigeria                                     8.0915044   9.5969681
+Nicaragua                                 -85.0328363  12.8456281
+Niue                                     -169.8683633 -19.0490715
+Netherlands                                 5.2141205  52.0681206
+Norway                                     15.4124500  68.7963997
+Nepal                                      83.9162531  28.2479223
+Nauru                                     166.9333091  -0.5209746
+New Zealand                               171.4701357 -41.8254724
+Oman                                       56.0927988  20.6009084
+Pakistan                                   69.3418521  29.9488301
+Panama                                    -80.1239167   8.5104498
+Pitcairn Islands                         -128.4791816 -24.4126735
+Peru                                      -74.3813071  -9.1535397
+Philippines                               122.8747136  11.7633828
+Palau                                     134.3383134   7.1732099
+Papua New Guinea                          145.2279304  -6.4703585
+Poland                                     19.3944511  52.1246717
+Puerto Rico                               -66.4663966  18.2256683
+North Korea                               127.1876702  40.1703757
+Portugal                                   -8.5920896  39.5856798
+Paraguay                                  -58.3984226 -23.2275190
+French Polynesia                         -145.0385897 -15.1702564
+Qatar                                      51.1875650  25.3127772
+Romania                                    24.9730994  45.8534125
+Russia                                     96.6889811  61.9834708
+Rwanda                                     29.9190607  -1.9927505
+Western Sahara                            -12.2147265  24.2327116
+Saudi Arabia                               44.5377592  24.1224437
+Sudan                                      29.9393833  15.9867575
+South Sudan                                30.2510660   7.3057061
+Senegal                                   -14.4710299  14.3677941
+Singapore                                 103.8137972   1.3587908
+South Georgia and South Sandwich Islands  -35.8975068 -54.6768453
+Saint Helena                              -10.1380158 -24.9053902
+Solomon Islands                           159.6167032  -8.9019542
+Sierra Leone                              -11.7948303   8.5631609
+El Salvador                               -88.8692613  13.7367041
+San Marino                                 12.4421645  43.9367590
+Somaliland                                 46.2527610   9.7317969
+Somalia                                    45.7053109   4.7475115
+Saint Pierre and Miquelon                 -56.3070970  46.9301905
+Republic of Serbia                         20.7903259  44.2214036
+Sao Tome and Principe                       6.7269578   0.4440395
+Suriname                                  -55.9121362   4.1284806
+Slovakia                                   19.4803829  48.7049350
+Slovenia                                   14.8081393  46.1161359
+Sweden                                     16.7528940  62.7891739
+Swaziland                                  31.4800241 -26.5619143
+Sint Maarten                              -63.0696362  18.0404300
+Seychelles                                 51.8822755  -6.5906753
+Syria                                      38.5046486  35.0229932
+Turks and Caicos Islands                  -71.8726060  21.7798770
+Chad                                       18.6462514  15.3330776
+Togo                                        0.9622836   8.5267208
+Thailand                                  101.0033181  15.1140818
+Tajikistan                                 71.0158224  38.5298896
+Turkmenistan                               59.3761426  39.1159339
+East Timor                                125.8513769  -8.8239326
+Tonga                                    -174.8407126 -19.9688065
+Trinidad and Tobago                       -61.2577179  10.4686601
+Tunisia                                     9.5518557  34.1159086
+Turkey                                     35.1673134  39.0609579
+Tuvalu                                    178.5198949  -7.7600583
+Taiwan                                    120.9508009  23.7524197
+United Republic of Tanzania                34.8131456  -6.2750503
+Uganda                                     32.3670398   1.2756912
+Ukraine                                    31.3858550  48.9972498
+United States Minor Outlying Islands      -97.1425851  14.0243027
+Uruguay                                   -56.0175602 -32.8001729
+United States of America                 -112.4931067  45.6871596
+US Naval Base Guantanamo Bay              -75.1532922  19.9223912
+Uzbekistan                                 63.1399089  41.7560359
+Vatican                                    12.4515508  41.9038272
+Saint Vincent and the Grenadines          -61.2026418  13.2160833
+Venezuela                                 -66.1767217   7.1250027
+British Virgin Islands                    -64.4989274  18.5141142
+United States Virgin Islands              -64.7901602  17.9590792
+Vietnam                                   106.3012960  16.6416056
+Vanuatu                                   167.7010584 -16.2014372
+West Bank                                  35.2449557  31.9453854
+Wallis and Futuna                        -177.2290190 -13.8471315
+Akrotiri Sovereign Base Area               32.9340534  34.6316793
+Samoa                                    -172.1602778 -13.7546762
+Yemen                                      47.5909306  15.9051546
+South Africa                               25.0877329 -29.0010519
+Zambia                                     27.7742123 -13.4601100
+Zimbabwe                                   29.8518846 -19.0025367
