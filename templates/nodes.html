@@ -4,18 +4,21 @@
 <style>
 
 .link {
-  stroke: #aaa;
+  stroke: rgb(243, 8, 8);
 }
 
 .node text {
+font-size: 13px;
+font-family: Sans-Serif;
 stroke:#333;
-cursos:pointer;
+
+
 }
 
 .node circle{
-stroke:#fff;
+stroke:rgb(63, 47, 156);
 stroke-width:3px;
-fill:#555;
+fill:rgb(245, 156, 156);
 }
 
 </style>
@@ -27,8 +30,8 @@ fill:#555;
 //   console.log(data)
 // })
 
-var width = 1200,
-    height = 500
+var width = 1550,
+    height = 800
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -36,9 +39,9 @@ var svg = d3.select("body").append("svg")
 
 
 var force = d3.layout.force()
-    .gravity(.05)
-    .distance(100)
-    .charge(-100)
+    .gravity(.07)
+    .distance(130)
+    .charge(-310)
     .size([width, height]);
 
 
@@ -103,10 +106,18 @@ for (v in wordIndex){
 //   console.log("v " + v)
 //   console.log(i)
 //   if(v === "Hong Kong" || v === "Singapor" || v === "Global"){console.log("unused key");continue}
+  words = 0
   for (k in wordIndex[v]){
-    //console.log(k)
-    topWord[v] = k
-    break
+    console.log(k +" " + v)
+    console.log(typeof topWord[v])
+    if (typeof topWord[v] !== 'undefined'){
+    topWord[v] = topWord[v] +" | "+ k
+    
+    }else{topWord[v] = k}
+    //console.log("I SHOIULD ONLY EXECTURE ONCE")
+    words++
+    if (words >= 2){break;}
+    
   }
 }
 console.log(topWord)
@@ -115,7 +126,7 @@ for (item in json.nodes){
   console.log(json.nodes[item].name)
   console.log(json.nodes[item])
   if (topWord[json.nodes[item].name]){
-  json.nodes[item].name = json.nodes[item].name + ' ' + topWord[json.nodes[item].name].toUpperCase()
+  json.nodes[item].name = json.nodes[item].name + ': ' + topWord[json.nodes[item].name].toUpperCase()
   }
   
 }
@@ -131,7 +142,7 @@ console.log(json.nodes)
 
 
 //d3.json(json, function(json) {
-console.log("DOES JSON EXIST?")
+//console.log("DOES JSON EXIST?")
 console.log(json)
 
   
@@ -144,7 +155,7 @@ console.log(json)
       .data(json.links)
     .enter().append("line")
       .attr("class", "link")
-    .style("stroke-width", function(d) { return Math.sqrt(d.weight); });
+    .style("stroke-width", function(d) { return Math.sqrt(d.weight); }); //weight not used yet
 
   var node = svg.selectAll(".node")
       .data(json.nodes)
@@ -153,11 +164,12 @@ console.log(json)
       .call(force.drag);
 
   node.append("circle")
-      .attr("r","5");
+      .attr("r","6");
 
+      
   node.append("text")
-      .attr("dx", 12)
-      .attr("dy", ".35em")
+      .attr("dx", -60)
+      .attr("dy", "-.90em")
       .text(function(d) { return d.name });
 
   force.on("tick", function() {

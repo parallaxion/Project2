@@ -39,7 +39,7 @@ today = dt.datetime.strftime(dt.date.today(), "%Y-%m-%d")
 countryWords = {}
 allWords = ''
 
-#if ran create db today#otherwise comment this out
+#if ran create db today#otherwise comment this out #same day or comment out
 latestDate = '2019-01-01'
 
 #if latest date is before today,
