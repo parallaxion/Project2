@@ -7,10 +7,13 @@
 
 //country variable defined for testing purposes
 var country = "Argentina"
-function buildChart(country) {
+function makeChart(country) {
   var countryurl = `/charts/${country}`;
-
+  // var countryurl = `http://127.0.0.1:9014/{country}/Argentina`
+  // var req = new XMLHttpRequest();
+  // req.open('GET', countryurl, true);
   var chartData = d3.json(countryurl).then((data) => {
+    // var chartData = load(countryurl).then((data) => {
     var name = data.country;
     var x = data.quantity;
     var y = data.keywords;
@@ -48,7 +51,7 @@ function handleSubmit() {
   d3.event.preventDefault();
 
   // Build the plot with the new stock
-  buildChart(country);
+  makeChart(country);
 }
 
 // // Add event listener for submit button
