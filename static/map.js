@@ -1,46 +1,87 @@
-//alert("JS LOADS!")
+// Add a tile layer
+var liteTiles = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+  maxZoom: 10,
+  id: "mapbox.light",
+  accessToken: API_KEY
+});
+
+var layers = {
+  COUNTRY_NAMES: new L.LayerGroup(),
+  COUNTRY_KEYWORDS: new L.LayerGroup()
+}
 
 var myMap = L.map("map", {
   center: [0, 0],
-  zoom: 2
+  zoom: 2,
+  layers: [
+    layers.COUNTRY_KEYWORDS,
+    // layers.COUNTRY_NAMES
+  ]
 });
   
-  // Add a tile layer
-  L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-    maxZoom: 5,
-    id: "mapbox.streets",
-    accessToken: API_KEY
-  }).addTo(myMap);
-  
-  // An array containing each city's name, location, and population
-var results = [{"Country": "Argentina", "Top": ["Trump", "Resigns", "Woman", "Worry", "Markel"]},  {"Country": "Canada", "Top": ["Hockey", "Kim", "Scared", "Snow", "Oil"]}]
-coords = {"Argentina": [-38.4161, -63.6167], "Canada": [56.1304, -106.3468]}
+liteTiles.addTo(myMap)
 
-d3.json("/world").then(function(data){  //http://localhost:5000/world //, { mode: 'cors'}
-  console.log("funk")
-  console.log(data)
-})
-
-console.log(coords)
-var locationLabels = []
-for (x in results) {
-    console.log(results[x]['Country'])
-    console.log(results[x]['Top'][0])
-    //console.log(coords[results[x]['Country']])
-    my = { "location": coords[results[x]['Country']], "name": results[x]['Country'], "label": results[x]['Top'][0]  } 
-    locationLabels.push(my)
-};
-for (var i = 0; i < locationLabels.length; i++) {
-    var here = locationLabels[i];
-    console.log(here.location)
-    L.marker(here.location)
-      .bindPopup("<h1>" + here.name + "</h1> <hr> <h3>Population " + here.label + "</h3>")
-      .addTo(myMap);
-}
 d3.json('/geojson').then(function(data) {
   // Creating a GeoJSON layer with the retrieved data
-  console.log(data)
+  // console.log(data)
   L.geoJson(data).addTo(myMap);
 });
-console.log("hi2")
+
+var overlays = {
+  "Keywords": layers.COUNTRY_KEYWORDS,
+  "Names": layers.COUNTRY_NAMES
+}
+  
+L.control.layers(overlays, null).addTo(myMap);
+
+
+
+d3.json("/map_info").then(function(map_info) {
+  countries_info = map_info.map_info
+  // for each country,
+  countries_info.forEach(info => {
+    // set name, coords, and top keyword
+    var country_name = info.country;
+    var lat = info.coords.lat
+    var lon = info.coords.lon
+    var keyword = info.keyword
+
+    // get top 5 keywords data from endpoint
+    d3.json("/keywords/"+country_name).then(function(country_keywords) {
+      top_five = country_keywords.top_five
+      // set empty list of keyword list items
+      var kw_list_items = []
+      var keyword_html = ""
+      // for each keyword, format and push to kw list items
+      top_five.forEach(keyword => {
+        kw_list_items.push("<li>"+keyword+"</li>")
+      });
+      // combine keyword list items into one html string
+      kw_list_items.forEach(item => {
+        keyword_html += item
+      })
+      console.log(keyword_html)
+
+      // name and keyword icons
+      name_icon = L.divIcon({className: "country_name_icon", html: "<h4>"+country_name+"</h4>"})
+      kw_icon = L.divIcon({className: "country_keyword_icon", html: "<h4>"+keyword+"</h4>"})
+
+      // name and keyword markers
+      nameMarker = L.marker([lat, lon], {
+        icon: name_icon
+      })
+      keywordMarker = L.marker([lat, lon], {
+        icon: kw_icon
+      })
+
+      // add name and keyword markers to names and keywords layers
+      nameMarker.addTo(layers["COUNTRY_NAMES"])
+      keywordMarker.addTo(layers["COUNTRY_KEYWORDS"])
+
+      nameMarker.bindPopup("<ul>"+keyword_html+"</ul></br><a href='/country/"+country_name+"'>Find out more...</a>");
+      keywordMarker.bindPopup("<ul>"+keyword_html+"</ul></br><a href='/country/"+country_name+"'>Find out more...</a>");
+      
+    }); // end of country keywords
+  }); // end for each country
+}) // end map_info
