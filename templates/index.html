@@ -14,14 +14,21 @@
   integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
   crossorigin=""></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
 <body>
-<div id="c">
-  <textarea id='content'></textarea>
+ <div id="c">
+  <a class="r-link ai-element ai-element_padding-all ai-element4" href="country/Global">Entire World Data</a> |
+  <a class="r-link ai-element ai-element_padding-all ai-element4" href="/nodes">Network of Keyword Nodes</a>
 </div>
-<div id="map" style="height: 800px; width: 800px;"></div>
+<div id="map" style="height: 900px; width: 1600px;"></div>
 
+<script type='text/javascript'>
+  document.getElementById("map").style.height = window.innerHeight-100+"px"; //had to add px, you cant freaking be serious.... CSS man
+  document.getElementById("map").style.width = window.innerWidth+"px"; 
+  window.onresize = function(){ location.reload(); }
+  </script>
 <script type="text/javascript" src="{{ url_for('static', filename='config.js') }}"></script>
 
 <script type="text/javascript" src="{{ url_for('static', filename='map.js') }}"></script>
