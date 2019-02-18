@@ -1,4 +1,3 @@
-<!--add mouse overs for keywords, add links to country page-->
 <!DOCTYPE html>
 <meta charset="utf-8">
 <script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
@@ -26,9 +25,13 @@ fill:rgb(245, 156, 156);
 <body>
 <script>
 
+// d3.json("/world").then(function(data){
 
-var width = window.innerWidth,
-    height = window.innerHeight
+//   console.log(data)
+// })
+
+var width = 1550,
+    height = 800
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -40,6 +43,9 @@ var force = d3.layout.force()
     .distance(130)
     .charge(-310)
     .size([width, height]);
+
+
+
 
 wordIndex = {}
 
@@ -62,10 +68,44 @@ console.log("do I exist?")
 console.log(words)
 
 wordIndex = words
+//console.log(json.nodes)
+// // // list has trash countries cannot index from data
+// i = 0
+// for (v in wordIndex){
+//   //if (json.nodes[i].name != undefined){    break}
+//   console.log("v " + v)
+//   console.log(i)
+//   if(v === "Hong Kong" || v === "Singapor" || v === "Global"){console.log("unused key");continue}
+//   for (k in wordIndex[v]){
+//     try{
+//     console.log("JSON NODE AS KEY:")
+//     console.log(json.nodes[i])
+    
+//     json.nodes[i].name = json.nodes[i].name + ' (' + v + ') ' +k  
+//     console.log("after:")
+    
+//     console.log(json.nodes[i])
+//     console.log(v + ' ' +k)
+//     i++
+//     break;
+//     }catch(err){
+//       console.log(err)
+//       console.log("SKIPPING")
+//       i++
+//       break;
+//     }
+//     //
+//   }
 
+// } //i++end
+//i = 0
 topWord = {}
 for (v in wordIndex){
-
+  //console.log(v)
+//if (json.nodes[i].name != undefined){    break}
+//   console.log("v " + v)
+//   console.log(i)
+//   if(v === "Hong Kong" || v === "Singapor" || v === "Global"){console.log("unused key");continue}
   words = 0
   for (k in wordIndex[v]){
     console.log(k +" " + v)
@@ -74,7 +114,7 @@ for (v in wordIndex){
     topWord[v] = topWord[v] +", "+ k
     
     }else{topWord[v] = k}
-    //on here once!
+    //console.log("I SHOIULD ONLY EXECTURE ONCE")
     words++
     if (words >= 2){break;}
     
@@ -84,7 +124,6 @@ console.log(topWord)
 for (item in json.nodes){
   
   console.log(json.nodes[item].name)
-  //if(json.nodes[item].name === "GLOBAL"){continue}
   console.log(json.nodes[item])
   if (topWord[json.nodes[item].name]){
   json.nodes[item].name = json.nodes[item].name + ': ' + topWord[json.nodes[item].name].toUpperCase()
@@ -93,7 +132,17 @@ for (item in json.nodes){
 }
 
 console.log(json.nodes)
+//return json
 
+//return json
+//testing this option
+//}).then(function(crap){//})
+//})
+
+
+
+//d3.json(json, function(json) {
+//console.log("DOES JSON EXIST?")
 console.log(json)
 
   
@@ -121,7 +170,6 @@ console.log(json)
   node.append("text")
       .attr("dx", -60)
       .attr("dy", "-.90em")
-      .attr("title", "test tooltip")
       .text(function(d) { return d.name });
 
   force.on("tick", function() {
@@ -132,7 +180,6 @@ console.log(json)
 
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
   });
-
+//});
 })
-window.onresize = function(){ location.reload(); }
 </script>

@@ -53,21 +53,46 @@ def blob():
 
 @app.route("/geojson")
 def geo():
-    #country geometry
+    #filename = "hello.txt"
     with open('countries.geo.json') as f:
         data = json.load(f)
     return json.dumps(data)
 
-@app.route("/keywords")
+@app.route("/keywords/")
 def keywords():
-    #dummy data test route
+    #connect to mongo
     {{"Country": "Argentina", "Top": ["Trump", "Resigns", "Woman", "Worry", "Markel"]}, {{"Country": "Canada", "Top": ["Hockey", "Kim", "Scared", "Snow", "Oil"]}}}
 
 ### FILTER BY KEYWORD!!
 
 @app.route("/world")
-def test(): 
-  
+def test():   #connect to mongodb
+    # conn = 'mongodb://localhost:27017/top_headlines'
+    # print(conn)
+    # client = pymongo.MongoClient(conn)
+    # print(client)
+    # # Declare the database
+    # db = client["top_headlines"]
+    # Declare the collection
+   
+###    collection = db["countries_keywords"]
+
+    # data = collection.find()
+
+    # #get data
+    # #countries =  db.collection.find().distinct("country")
+    # routeReturn = {}
+    # for country in collection.find().distinct('country'):
+    #  #   print(country)
+    #     myWords = collection.find_one({"country": country})
+    #     routeReturn[country] = myWords['keywords']
+    # #    print(myWords['keywords'])
+    # print(routeReturn)
+    ###
+   ## data = collection.find({"country": "Ireland"})
+    #print(DeprecationWarning)
+   # for x in data:
+        #print(x)
     routeReturn = getKeywords()
     return json.dumps(routeReturn)
 
@@ -83,12 +108,14 @@ def getKeywords():
 
         data = collection.find()
 
+        #get data
+        #countries =  db.collection.find().distinct("country")
         routeReturn = {}
         for country in collection.find().distinct('country'):
-
+        #   print(country)
             myWords = collection.find_one({"country": country})
             routeReturn[country] = myWords['keywords']
-
+        #    print(myWords['keywords'])
         print(routeReturn)
         return(routeReturn)
 

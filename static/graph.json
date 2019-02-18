@@ -38,8 +38,8 @@
         {"name":"Romania", "group":35},
         {"name":"Russia", "group":36},
         {"name":"Saudi Arabia", "group":37},
-        {"name":"GLOBAL", "group":38},
-        {"name":"Malaysia", "group":39},
+        {"name":"Global", "group":38},
+        {"name":"GLOBAL", "group":39},
         {"name":"Slovakia", "group":40},
         {"name":"Slovenia", "group":41},
         {"name":"South Africa", "group":42},
@@ -122,6 +122,8 @@
 
           {"source":25,"target":18},
           {"source":25,"target":47},
+          {"source":25,"target":32},
+
           {"source":26,"target":52},
           {"source":26,"target":9},
         
@@ -156,7 +158,7 @@
           {"source":36,"target":23},
           {"source":37,"target":49},
         
-          {"source":39,"target":18},
+          
           {"source":37,"target":47},
           {"source":40,"target":10},
           {"source":40,"target":2},
