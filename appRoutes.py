@@ -139,20 +139,48 @@ def country_keywords(country):
     #find the document that matches the country
     all_keywords = collection.find_one({"country": country})
     #list all keywords
-    all_keywords = list(all_keywords["keywords"].keys())
+    all_keywords_list = list(all_keywords["keywords"].keys())
+    #list all keyword values
+    all_values = []
+    for word in all_keywords_list:
+        all_values.append(all_keywords["keywords"][word])
     #take top five
-    top_five = [all_keywords[i] for i in range(5)]
+    top_five = [all_keywords_list[i] for i in range(5)]
+
+    keyword_dict = {}
     #add top five to keyword dict
-    keyword_dict = {"top_five": top_five}
+    keyword_dict["top_five"] = top_five
+    #add all keywords and values to keyword dict
+    keyword_dict["all_keywords"] = all_keywords_list
+    keyword_dict["all_values"] = all_values
     return jsonify (keyword_dict)
 
 @app.route("/country/<country>")
 def country_dash(country):
     #this is the site that is linked to in the country's tooltip
     
-    return jsonify ({"To Do": "Country dashboard goes here"})
+    return render_template('indexb.html')
 
-
+@app.route("/charts/<country>")
+def chartData(country):   #connect to mongodb
+    conn = 'mongodb://localhost:27017/top_headlines'
+    print(conn)
+    client = pymongo.MongoClient(conn)
+    print(client)
+    # Declare the database
+    db = client["top_headlines"]
+    # Declare the collection
+    collection = db["countries_keywords"]
+    # country = request.args.get('country')
+    data = dumps(collection.find({"country": country}))
+    data = json.loads(data)
+    keywords = data[0]["keywords"]
+    chart_df = pd.DataFrame.from_dict(keywords, orient="index")
+    chart_df = chart_df.reset_index()
+    chart_df = chart_df.head(5)
+    top5keywords = chart_df["index"]
+    top5scores = chart_df[0]
+    return jsonify({"country": country, "keywords": list(top5keywords), "quantity": list(top5scores)})
 
 
 
