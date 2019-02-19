@@ -38,7 +38,7 @@ today = dt.datetime.strftime(dt.date.today(), "%Y-%m-%d")
 #initialize countryWords dict and allWords string
 countryWords = {}
 allWords = ''
-
+# latestDate = '2019-02-13'
 #if latest date is before today,
 if latestDate < today:
     #for length of country_code list

@@ -15,7 +15,7 @@ def index():
 
  
    # return render_template('index.html')
-   return render_template("coel.html")
+   return render_template('bargraph.html')
 
 
 

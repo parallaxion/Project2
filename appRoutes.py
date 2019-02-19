@@ -51,6 +51,32 @@ def test():   #connect to mongodb
     #    print(myWords['keywords'])
     print(routeReturn)
     
+#route to return country's top 5 keywords for pop-up
+@app.route("/keywords/<country>")
+def country_keywords(country):
+    #set collection
+collection = db["countries_keywords"]
+#find the document that matches the country
+all_keywords = collection.find_one({"country": country})
+#list all keywords
+all_keywords_list = list(all_keywords["keywords"].keys())
+#list all keyword values
+all_values = []
+for word in all_keywords_list:
+    all_values.append(all_keywords["keywords"][word])
+#take top five
+top_five = [all_keywords_list[i] for i in range(5)]
+
+keyword_dict = {}
+#add top five to keyword dict
+keyword_dict["top_five"] = top_five
+#add all keywords and values to keyword dict
+keyword_dict["all_keywords"] = all_keywords_list
+keyword_dict["all_values"] = all_values
+    return jsonify (keyword_dict)
+
+console.log(all_keywords)
+
    ## data = collection.find({"country": "Ireland"})
     #print(DeprecationWarning)
    # for x in data:
