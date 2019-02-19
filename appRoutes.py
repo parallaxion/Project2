@@ -5,12 +5,16 @@ import pymongo
 import requests
 import json
 import requests
+import pandas as pd
+import operator
+import pandas as pd
+import matplotlib.pyplot as plt
 
 from bson.json_util import dumps
 #import update from updateDB
 from config import API_KEY
 from countries import countries, country_codes
-print(countries + country_codes)
+#print(countries + country_codes)
 
 from flask import Flask, jsonify, render_template
 app = Flask(__name__)
@@ -152,9 +156,45 @@ def country_keywords(country):
 
 @app.route("/country/<country>")
 def country_dash(country):
-    #this is the site that is linked to in the country's tooltip
+    #this page that is linked in the country's tooltip
+    #big merge here
+
+    ### Jacobs simple count ###
+    print(country)
+    collection = db["countries_wordblob"]
+
+    myDat = {}
+    #print(routeReturn)
+    for x in collection.find({"country":country}):
+        myDat[x["country"]] = x["words"]
+    #print(myDat)
+    xxyy = {}
+    for word in myDat[country]: #wish i could use arrays
+        #print(word) 
+        if word in xxyy:
+            xxyy[word] = xxyy[word] + 1
+        elif word not in xxyy:
+            xxyy[word] = 1
+    #print(xxyy)
+    pdict= {}
+    pdict['x'] = []
+    pdict['y'] = []
     
-    return jsonify ({"To Do": "Country dashboard goes here"})
+    for key,val in xxyy.items():
+        #print( key, "=>", val )
+        pdict['x'].append(key)
+        pdict['y'].append(val)
+    print(pdict)
+    df = pd.DataFrame.from_dict(pdict) #always in brackets, why? WHY!? okay, now it doesnt want brackets
+    print(df)
+    #df = pd.DataFrame.from_dict(dat)
+    df.sort_values(by='y', ascending=False)
+    df = df.head(20).sort_values(by='y', ascending=False)
+    df.plot(kind='bar', x='x',y='y')
+    #dhtml = df.to_html()
+    plt.savefig('static/'+country+'.png', bbox_inches="tight")
+    cnt = country +".png"
+    return render_template('mycountry.html',country=cnt)
 
 
 @app.route("/keywords")
@@ -175,7 +215,11 @@ def nodes():
     
     flaskJSON= getKeywords()
     print(flaskJSON)
-    return render_template('nodes.html', flaskJSON=flaskJSON )
+    x = flaskJSON
+    for z in x:
+        x[z] = sorted(x[z].items(), key=operator.itemgetter(1))
+    print(x)    
+    return render_template('nodes.html', flaskJSON=x )
 
 def getKeywords():
         collection = db["countries_keywords"]

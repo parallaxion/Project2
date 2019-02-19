@@ -1,11 +1,13 @@
 <!--add mouse overs for keywords, add links to country page-->
 <!DOCTYPE html>
+<html>
+  <head>
 <meta charset="utf-8">
 <script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
 <style>
 
 .link {
-  stroke: rgb(243, 8, 8);
+  stroke: rgb(255, 61, 61);
 }
 
 .node text {
@@ -17,13 +19,20 @@ stroke:#333;
 }
 
 .node circle{
-stroke:rgb(63, 47, 156);
+stroke:rgb(55, 104, 196);
 stroke-width:3px;
-fill:rgb(245, 156, 156);
+fill:rgb(153, 223, 255);
 }
 
 </style>
-<body>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body style="background-color:rgb(202, 202, 202)">
+    <div id="c">
+        <a class="r-link ai-element ai-element_padding-all ai-element4" href="country/Global">Entire World Data</a> |
+        <a class="r-link ai-element ai-element_padding-all ai-element4" href="/nodes">Network of Keyword Nodes</a>
+      </div>
+<div >
 <script>
 
 
@@ -61,24 +70,27 @@ words = JSON.parse('{{ flaskJSON | tojson | safe }}')
 console.log("do I exist?")
 console.log(words)
 
-wordIndex = words
+wordIndex = words //lord
 
 topWord = {}
 for (v in wordIndex){
+  console.log(wordIndex[v][wordIndex[v].length -1])
+  console.log(wordIndex[v][wordIndex[v].length -2])
+  topWord[v] = wordIndex[v][wordIndex[v].length -1][0] +", "+ wordIndex[v][wordIndex[v].length -2][0]
 
-  words = 0
-  for (k in wordIndex[v]){
-    console.log(k +" " + v)
-    console.log(typeof topWord[v])
-    if (typeof topWord[v] !== 'undefined'){
-    topWord[v] = topWord[v] +", "+ k
+  // words = 0
+  // for (k in wordIndex[v]){
+  //   console.log(k +" " + v)
+  //   console.log(typeof topWord[v])
+  //   if (typeof topWord[v] !== 'undefined'){
+  //   topWord[v] = topWord[v] +", "+ k
     
-    }else{topWord[v] = k}
-    //on here once!
-    words++
-    if (words >= 2){break;}
+  //   }else{topWord[v] = k}
+  //   //on here once!
+  //   words++
+  //   if (words >= 2){break;}
     
-  }
+      //}
 }
 console.log(topWord)
 for (item in json.nodes){
@@ -135,4 +147,8 @@ console.log(json)
 
 })
 window.onresize = function(){ location.reload(); }
+
 </script>
+</div>
+</body>
+</html>
