@@ -32,17 +32,22 @@ function makeChart(country) {
       type: "bar",
       orientation: "h"
     };
-      var layout1 = {
-        height: 500,
-        width: 800,
-        // function(d) {
-        //       return d * 10;
-        //     },
-        xaxis: {
-          title: `Top 5 Key-Phrases for ${name}`,
-          automargin: true
-        }
-      };
+    var layout1 = {
+      height: 450,
+      width: 900,
+      title: `Top 5 Key-Phrases for ${name}`,
+      plot_bgcolor: 'rgba(202, 202, 202, 0.2)',
+      paper_bgcolor: 'rgba(202, 202, 202, 0.2)',
+      margin: {
+        l: 175,
+        r: 75,
+        t: 25,
+        b: 50
+      },
+      xaxis: {
+        title: "Word Degree",
+      }
+    };
       var data1 = [trace1];
       // Render the plot to the div tag with id "chart"
       Plotly.newPlot("chart", data1, layout1);

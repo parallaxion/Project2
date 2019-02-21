@@ -4,3 +4,5 @@ mapLogicExamples/
 testingHistory/
 testapp.js
 config.py
+*.bak
+*.png

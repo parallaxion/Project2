@@ -201,7 +201,7 @@ def country_dash(country):
     df = df.head(20).sort_values(by='y', ascending=False)
     df.plot(kind='bar', x='x',y='y')
     #dhtml = df.to_html()
-    plt.savefig('static/'+country+'.png', bbox_inches="tight")
+    plt.savefig('static/'+country+'.png', bbox_inches="tight", facecolor=(0, 0.79, 0.79), transparent=True)
     cnt = country +".png"
     return render_template('indexb.html',country=cnt, title=country)
     #return render_template('mycountry.html',country=cnt)
@@ -267,3 +267,5 @@ def getKeywords():
 
 if __name__ == "__main__":
     app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(port=7075, debug=True)

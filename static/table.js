@@ -14,25 +14,41 @@ d3.json("/keywords/"+country).then(result => {
 
   // set data for table
   var data = [{
-  type: 'table',
-  // header
-  header: {
-    values: [["Keyword"], ["Word Degree"]],
-    align: "center",
-    line: {width: 1, color: 'black'},
-    fill: {color: "grey"},
-    font: {family: "Arial", size: 20, color: "white"}
+    type: 'table',
+    columnwidth: [250,250],
+    columnorder: [1,2],
+    header: {
+      values: [["Keyword"], ["Word Degree"]],
+      align: "center",
+      line: {width: 2, color: 'black'},
+      fill: {color: ['rgb(31, 119, 180)']},
+      font: {family: "Arial", size: 28, color: "white"},
+      height: 40
   },
   // cells
   cells: {
     values: values,
     align: "center",
-    line: {color: "black", width: 1},
-    font: {family: "Arial", size: 12, color: ["black"]}
+    line: {color: "black", width: 2},
+    fill: {color: ['rgb(31, 119, 180)']},
+    font: {family: "Arial", size: 22, color: ["white"]},
+    height: 30
   }
   }]
 
+  var layout = {
+    height: 400,
+    margin: {
+      l: 175,
+      r: 75,
+      t: 25,
+      b: 5
+    },
+    plot_bgcolor: 'rgba(202, 202, 202, 0.2)',
+    paper_bgcolor: 'rgba(202, 202, 202, 0.2)'
+
+  };
   // plot table
-  Plotly.plot('table', data);
+  Plotly.plot('table', data, layout);
 
 })
